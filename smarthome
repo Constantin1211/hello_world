@@ -1,1 +1,17 @@
-smsrthome
+FUNCTION_BLOCK SM_BUTT            (*ФУНКЦИОНАЛЬНЫЙ БЛОК ДЛЯ ПРОСТОЙ КНОПКИ*)
+    VAR_INPUT
+       IN: BOOL;           (*ВХОД ЗА КОТОРЫМ МЫ СЛЕДИМ *)
+    END_VAR
+    VAR_OUTPUT
+       Q:BOOL:=FALSE;        (*СОСТОЯНИЕ ВЫХОДА НА ЛАМПОЧКУ *)
+    END_VAR
+    VAR
+       MEM : BOOL := FALSE;    (*ВНУТРЕННЯЯ ПЕРЕМЕННАЯ ДЛЯ ХРАНЕНИЯ СОСТОЯНИЯ ВХОДА*)
+    END_VAR
+
+    IF IN AND NOT MEM THEN (* ПОЙМАЛИ ПЕРЕДНИЙ ФРОНТ - НАЖАЛИ НА КНОПКУ *)
+       Q:= NOT Q;    (* МЕНЯЕМ СОСТОЯНИЕ ВЫХОДА НА ПРОТИВОПОЛОЖНОЕ *)
+    END_IF
+
+    MEM := IN;                        (* ЗАПОМИНАЕМ ТЕКУЩЕЕ ЗНАЧЕНИЕ ВХОДА *)
+    END_FUNCTION_BLOCK
